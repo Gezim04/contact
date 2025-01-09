@@ -5,65 +5,55 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contact Form - Novaterra+</title>
   <style>
-    /* Le CSS reste le même */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     .form-container {
+      width: 100%;
       max-width: 800px;
       margin: 0 auto;
       padding: 20px;
-      opacity: 0;
-      animation: slideIn 0.8s ease forwards;
-    }
-
-    @keyframes slideIn {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
     }
 
     .form-title {
       text-align: center;
-      margin-bottom: 40px;
-      animation: fadeIn 1s ease 0.3s backwards;
+      margin-bottom: 30px;
+      padding: 0 15px;
+    }
+
+    .form-title h1 {
+      font-size: 2rem;
+      color: #1a365d;
+      margin-bottom: 10px;
     }
 
     .form-group {
       margin-bottom: 20px;
-      animation: slideIn 0.5s ease backwards;
+      padding: 0 15px;
     }
-
-    .form-group:nth-child(1) { animation-delay: 0.2s; }
-    .form-group:nth-child(2) { animation-delay: 0.3s; }
-    .form-group:nth-child(3) { animation-delay: 0.4s; }
-    .form-group:nth-child(4) { animation-delay: 0.5s; }
-    .form-group:nth-child(5) { animation-delay: 0.6s; }
 
     .input-field {
       width: 100%;
       padding: 12px;
       border: 2px solid #e2e8f0;
       border-radius: 8px;
-      transition: all 0.3s ease;
+      font-size: 16px;
     }
 
-    .input-field:focus {
-      border-color: #3182ce;
-      box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.1);
-      transform: scale(1.01);
+    .label {
+      display: block;
+      margin-bottom: 8px;
+      color: #2d3748;
+      font-weight: 500;
+      font-size: 16px;
     }
 
-    .input-field:hover {
-      animation: pulseField 0.8s ease;
-    }
-
-    @keyframes pulseField {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.01); }
-      100% { transform: scale(1); }
+    textarea.input-field {
+      min-height: 120px;
+      resize: vertical;
     }
 
     .submit-button {
@@ -71,72 +61,81 @@
       padding: 14px;
       border: none;
       border-radius: 8px;
-      background: linear-gradient(45deg, #1a365d, #3182ce, #1a365d);
-      background-size: 200% 200%;
+      background: #1a365d;
       color: white;
       font-weight: bold;
+      font-size: 16px;
       cursor: pointer;
-      transition: all 0.3s ease;
-      animation: gradientMove 3s ease infinite;
     }
 
-    .submit-button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(49, 130, 206, 0.2);
-    }
-
-    @keyframes gradientMove {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    .success-message {
-      opacity: 0;
-      transform: translateY(20px);
-      animation: successFade 0.5s ease forwards;
-    }
-
-    @keyframes successFade {
-      to {
-        opacity: 1;
-        transform: translateY(0);
+    /* Styles mobiles spécifiques */
+    @media (max-width: 768px) {
+      .form-container {
+        padding: 15px;
       }
+
+      .form-title h1 {
+        font-size: 1.75rem;
+      }
+
+      .form-group {
+        padding: 0;
+      }
+
+      .input-field {
+        padding: 10px;
+        font-size: 16px;
+      }
+
+      .label {
+        font-size: 14px;
+      }
+
+      .submit-button {
+        padding: 12px;
+        font-size: 16px;
+      }
+    }
+
+    /* Fix pour les champs de formulaire sur iOS */
+    @media screen and (-webkit-min-device-pixel-ratio: 0) { 
+      select,
+      textarea,
+      input {
+        font-size: 16px;
+      }
+    }
+
+    .hidden {
+      display: none;
     }
   </style>
 </head>
 <body>
   <div class="form-container">
     <div class="form-title">
-      <h1 style="font-size: 2.5rem; color: #1a365d; margin-bottom: 10px;">Contactez-nous</h1>
-      <p style="color: #4a5568;">Notre équipe est à votre disposition pour répondre à vos questions</p>
+      <h1>Contactez-nous</h1>
+      <p>Notre équipe est à votre disposition pour répondre à vos questions</p>
     </div>
 
-    <form 
-  action="https://formspree.io/f/xlddaebj" 
-  method="POST">
-      <input type="hidden" name="form-name" value="contact" />
-      <p class="hidden">
-        <label>Ne pas remplir si vous êtes humain: <input name="bot-field" /></label>
-      </p>
-
+    <form action="https://formspree.io/f/xlddaebj" method="POST">
       <div class="form-group">
-        <label style="display: block; margin-bottom: 8px; color: #2d3748; font-weight: 500;">Nom complet</label>
+        <label class="label">Nom complet</label>
         <input type="text" name="name" class="input-field" placeholder="Votre nom" required>
       </div>
 
       <div class="form-group">
-        <label style="display: block; margin-bottom: 8px; color: #2d3748; font-weight: 500;">Email</label>
+        <label class="label">Email</label>
         <input type="email" name="email" class="input-field" placeholder="votre@email.ch" required>
       </div>
 
       <div class="form-group">
-        <label style="display: block; margin-bottom: 8px; color: #2d3748; font-weight: 500;">Téléphone</label>
+        <label class="label">Téléphone</label>
         <input type="tel" name="phone" class="input-field" placeholder="+41 XX XXX XX XX" required>
       </div>
 
       <div class="form-group">
-        <label style="display: block; margin-bottom: 8px; color: #2d3748; font-weight: 500;">Sujet</label>
+        <label class="label">Sujet</label>
         <select name="subject" class="input-field" required>
           <option value="">Sélectionnez un sujet</option>
           <option value="general">Demande d'information général</option>
@@ -148,13 +147,15 @@
       </div>
 
       <div class="form-group">
-        <label style="display: block; margin-bottom: 8px; color: #2d3748; font-weight: 500;">Message</label>
+        <label class="label">Message</label>
         <textarea name="message" class="input-field" rows="6" placeholder="Votre message..." required></textarea>
       </div>
 
-      <button type="submit" class="submit-button">
-        Envoyer le message
-      </button>
+      <div class="form-group">
+        <button type="submit" class="submit-button">
+          Envoyer le message
+        </button>
+      </div>
     </form>
   </div>
 </body>
